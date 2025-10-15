@@ -264,8 +264,9 @@
     <h2><i class="fa-solid fa-users-gear"></i> Tim Pengembang Aplikasi</h2>
     <div class="card">
       <p><strong>Roys Wanimbo</strong> – Developer PPDB Online</p>
+      <p><strong>Komunitas Sacode</strong> – Pendamping Belajar & Bantu Dalam Merancang Website ppdb Sekolah</p>
       <p><strong>kepsek </strong> – Dokumentasi & Data</p>
-      <p><strong>Komunitas Sacode</strong> – Pendamping Belajar</p>
+  
     </div>
   </main>
 
