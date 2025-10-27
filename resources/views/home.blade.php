@@ -7,12 +7,13 @@
 
   <!-- Font & Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {margin:0; padding:0; box-sizing:border-box;}
-    body {
-      font-family: "Poppins", "Segoe UI", sans-serif;
-      background: #f7f9fc;
+    html, body {
+      font-family: "Poppins", sans-serif;
+      background: #eef3f8;
       color: #222;
       scroll-behavior: smooth;
     }
@@ -26,9 +27,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(90deg, #002b6d, #003b9a);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(90deg, #002b6d, #0048b0);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.35);
       z-index: 1000;
+      backdrop-filter: blur(8px);
     }
 
     nav .logo {
@@ -39,22 +41,27 @@
     }
 
     nav .logo img {
-      width: 45px;
-      height: 45px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 2px solid #fff;
+      transition: transform 0.3s ease;
     }
+
+    nav .logo img:hover { transform: rotate(10deg) scale(1.1); }
 
     nav .logo h3 {
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
     nav ul {
       display: flex;
       gap: 25px;
       list-style: none;
+      transition: 0.3s ease;
     }
 
     nav ul li a {
@@ -62,17 +69,17 @@
       text-decoration: none;
       font-weight: 500;
       padding: 6px 14px;
-      border-radius: 8px;
-      transition: 0.3s;
+      border-radius: 10px;
+      transition: 0.3s ease;
     }
 
     nav ul li a:hover,
     nav ul li a.active {
       background: #ffc107;
       color: #002b6d;
+      box-shadow: 0 0 10px rgba(255, 193, 7, 0.7);
     }
 
-    /* ===== HAMBURGER MENU ===== */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -96,7 +103,7 @@
         right: -100%;
         height: 100vh;
         width: 250px;
-        background: rgba(0,0,50,0.97);
+        background: rgba(0,0,50,0.95);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -108,19 +115,18 @@
       .hamburger.active div:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
     }
 
-    /* ===== SLIDER ===== */
+    /* ===== SLIDER PARALLAX ===== */
     .slider {
       margin-top: 70px;
       position: relative;
       width: 100%;
-      height: 75vh;
+      height: 80vh;
       overflow: hidden;
+      border-radius: 0 0 25px 25px;
     }
 
     .slide {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       opacity: 0;
@@ -134,9 +140,15 @@
 
     .slide img {
       width: 100%;
-      height: 100%;
+      height: 120%;
       object-fit: cover;
-      filter: brightness(0.8);
+      filter: brightness(0.75);
+      transform: translateY(0);
+      transition: transform 8s ease;
+    }
+
+    .slide.active img {
+      transform: translateY(-30px) scale(1.1);
     }
 
     .slide-caption {
@@ -147,19 +159,19 @@
       background: rgba(0,0,0,0.45);
       color: #fff;
       text-align: center;
-      padding: 25px 40px;
-      border-radius: 12px;
+      padding: 30px 50px;
+      border-radius: 15px;
       backdrop-filter: blur(6px);
+      animation: fadeUp 1s ease;
     }
 
-    .slide-caption h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translate(-50%, -40%);}
+      to {opacity: 1; transform: translate(-50%, -50%);}
     }
 
-    .slide-caption p {
-      font-size: 1rem;
-    }
+    .slide-caption h2 { font-size: 2.2rem; margin-bottom: 10px; }
+    .slide-caption p { font-size: 1rem; }
 
     .dots {
       position: absolute;
@@ -176,91 +188,105 @@
       background-color: rgba(255,255,255,0.6);
       border-radius: 50%;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: 0.3s;
     }
 
     .dots span.active {
       background-color: #ffc107;
-      transform: scale(1.2);
+      transform: scale(1.3);
     }
 
-    /* ===== MAIN CONTENT ===== */
+    /* ===== MAIN ===== */
     main {
       text-align: center;
-      padding: 70px 20px;
+      padding: 80px 20px;
       background: #fff;
     }
 
     main h1 {
-      font-size: 2.3rem;
+      font-size: 2.4rem;
       color: #003366;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      font-weight: 700;
     }
 
     main p {
-      color: #555;
+      color: #444;
       max-width: 800px;
-      margin: 0 auto 35px;
+      margin: 0 auto 40px;
       line-height: 1.8;
     }
 
+    /* ===== FADE-IN ANIMATION ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     section {
-      background: #f8f9fa;
+      background: linear-gradient(135deg, #fefefe, #f5f7ff);
       border-radius: 15px;
-      padding: 25px;
-      margin: 25px auto;
+      padding: 30px;
+      margin: 30px auto;
       max-width: 850px;
       text-align: left;
       box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
     }
-    section:hover { transform: translateY(-4px); }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
 
     section h2 {
       color: #0d47a1;
       margin-bottom: 10px;
-      border-left: 5px solid #ffc107;
+      border-left: 6px solid #ffc107;
       padding-left: 10px;
-    }
-
-    section ul {
-      padding-left: 20px;
-      line-height: 1.8;
+      font-size: 1.3rem;
     }
 
     .btn-group {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 25px;
+      gap: 20px;
+      margin-top: 40px;
     }
 
     .login-link {
       background: #ffc107;
       color: #003366;
-      padding: 12px 28px;
+      padding: 13px 32px;
       font-weight: 600;
-      border-radius: 30px;
+      border-radius: 50px;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.25);
+      transition: all 0.35s ease;
     }
 
     .login-link:hover {
       background: #003366;
       color: #fff;
       transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      box-shadow: 0 7px 20px rgba(0,0,0,0.35);
     }
 
     footer {
       text-align: center;
-      background: #002b6d;
+      background: linear-gradient(90deg, #002b6d, #003b9a);
       color: #fff;
       padding: 25px;
       margin-top: 50px;
       font-size: 0.9rem;
+      letter-spacing: 0.4px;
     }
 
     @media(max-width:480px){
@@ -296,7 +322,7 @@
   <!-- SLIDER -->
   <div class="slider" id="slider">
     <div class="slide active">
-      <img src="{{ asset('images/poster.jpeg') }}" alt="SMP Pirime">
+      <img src="{{ asset('images/bg.jpg') }}" alt="SMP Pirime">
       <div class="slide-caption">
         <h2>Selamat Datang di SMP Negeri 1 Pirime</h2>
         <p>Lingkungan belajar yang nyaman dan inspiratif</p>
@@ -312,8 +338,9 @@
     </div>
 
     <div class="slide">
-      <img src="{{ asset('images/poster.jpeg') }}" alt="PPDB Online">
+      <img src="{{ asset('/images/pirime.jpg') }}" alt="PPDB Online">
       <div class="slide-caption">
+          <img src="{{ asset('/images/Kartun_Siswa_SMP.png') }}" alt="PPDB Online" width="100px">
         <h2>PPDB Online 2025</h2>
         <p>Pendaftaran mudah, cepat, dan transparan</p>
       </div>
@@ -324,15 +351,15 @@
 
   <!-- MAIN CONTENT -->
   <main>
-    <h1>PPDB Online SMP Negeri 1 Pirime Tahun 2025</h1>
-    <p>Proses pendaftaran siswa baru kini dapat dilakukan secara <strong>online</strong>. Calon peserta didik dapat mengisi formulir pendaftaran dari rumah dan memantau hasil seleksi langsung dari website ini.</p>
+    <h1 class="fade-in">PPDB Online SMP Negeri 1 Pirime Tahun 2025</h1>
+    <p class="fade-in">Pendaftaran siswa baru kini dapat dilakukan secara <strong>online</strong>. Lengkapi data dan pantau hasil seleksi dari website resmi sekolah ini.</p>
 
-    <section>
+    <section class="fade-in">
       <h2>🧾 Tentang PPDB Online</h2>
-      <p>Sistem ini dirancang untuk mempermudah proses pendaftaran dan memastikan seleksi berjalan transparan. Pendaftar hanya perlu melengkapi data, mengunggah berkas, dan menunggu hasil verifikasi dari panitia PPDB SMP Negeri 1 Pirime.</p>
+      <p>Sistem ini dirancang untuk mempermudah proses pendaftaran dan memastikan seleksi berjalan transparan. Calon peserta cukup melengkapi data, unggah berkas, dan tunggu hasil verifikasi dari panitia PPDB SMP Negeri 1 Pirime.</p>
     </section>
 
-    <section>
+    <section class="fade-in">
       <h2>📋 Syarat Pendaftaran</h2>
       <ul>
         <li>Fotokopi ijazah SD/sederajat yang dilegalisir.</li>
@@ -344,19 +371,18 @@
       </ul>
     </section>
 
-    <div class="btn-group">
-      <a href="{{ route('login') }}" class="login-link">Login</a>
-      <a href="{{ route('daftar') }}" class="login-link">Daftar Sekarang</a>
+    <div class="btn-group fade-in">
+      <a href="{{ route('login') }}" class="login-link"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+      <a href="{{ route('daftar') }}" class="login-link"><i class="fa-solid fa-user-plus"></i> Daftar Sekarang</a>
     </div>
   </main>
 
-  <footer>
+  <footer class="fade-in">
     &copy; 2025 SMP Negeri 1 Pirime | Sistem Informasi PPDB Online
   </footer>
 
   <!-- SCRIPT -->
   <script>
-    // Menu
     function toggleMenu(hamburger){
       const menu = document.getElementById('menu');
       menu.classList.toggle('show');
@@ -373,6 +399,7 @@
       dot.addEventListener('click', () => showSlide(i));
       dotsContainer.appendChild(dot);
     });
+
     const dots = dotsContainer.querySelectorAll('span');
     updateDots();
 
@@ -387,7 +414,24 @@
       dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
     }
 
-    setInterval(() => showSlide(index + 1), 5000);
+    setInterval(() => showSlide(index + 1), 6000);
+
+    // Fade-in saat scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    window.addEventListener('scroll', () => {
+      const trigger = window.innerHeight * 0.85;
+      fadeEls.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < trigger) el.classList.add('show');
+      });
+    });
+
+    // Parallax scroll effect
+    window.addEventListener('scroll', () => {
+      const slider = document.getElementById('slider');
+      const offset = window.pageYOffset;
+      slider.style.backgroundPositionY = offset * 0.5 + "px";
+    });
   </script>
 </body>
 </html>
