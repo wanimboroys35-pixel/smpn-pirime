@@ -312,10 +312,10 @@
 
     <ul id="menu">
       <li><a href="{{ route('home') }}" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="{{ route('tentang') }}"><i class="fa-solid fa-school"></i> Tentang</a></li>
-      <li><a href="#"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
-      <li><a href="#"><i class="fa-solid fa-envelope"></i> Kontak</a></li>
-      <li><a href="{{ route('daftar') }}"><i class="fa-solid fa-user-plus"></i> Daftar</a></li>
+      <li><a href="{{ route('tentang') }}"  class="active">><i class="fa-solid fa-school"></i> Tentang</a></li>
+      <li><a href="{{ route('galery') }}"  class="active">><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+      <li><a href="{{ route('contak') }}" class="active">><i class="fa-solid fa-envelope"></i> Kontak</a></li>
+      <li><a href="{{ route('daftar') }}"  class="active">><i class="fa-solid fa-user-plus"></i> Daftar</a></li>
     </ul>
   </nav>
 
